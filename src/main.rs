@@ -11,6 +11,7 @@ struct Cli {
 #[derive(Debug, Subcommand)]
 enum Command {
     Add(Arguments),
+    Add2(Arguments),
     Sub(Arguments),
     // Mul(Arguments),
     // Div(Arguments),
@@ -32,6 +33,10 @@ fn main() {
             args = input;
             func = add;
         }
+        Command::Add2(input) => {
+            args = input;
+            func = add2;
+        }
         Command::Sub(input) => {
             args = input;
             func = |x, y| x - y; // inline closure
@@ -42,6 +47,15 @@ fn main() {
     println!("{answer}");
 }
 
-fn add(lhs: Num, rhs: Num) -> Num {
+// one way of using generics
+fn add<T: std::ops::Add<Output = T>>(lhs: T, rhs: T) -> T {
+    lhs + rhs
+}
+
+// another way of using generics
+fn add2<T>(lhs: T, rhs: T) -> T
+where
+    T: std::ops::Add<Output = T>,
+{
     lhs + rhs
 }

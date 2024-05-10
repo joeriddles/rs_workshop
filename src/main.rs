@@ -22,20 +22,11 @@ struct Arguments {
 
 fn main() {
     let cli = Cli::parse();
-    let answer;
-    match cli.command {
-        Command::Add(args) => {
-            answer = args.lhs + args.rhs;
-        }
-        Command::Sub(args) => {
-            answer = args.lhs - args.rhs;
-        }
-        Command::Mul(args) => {
-            answer = args.lhs * args.rhs;
-        }
-        Command::Div(args) => {
-            answer = args.lhs / args.rhs;
-        }
-    }
+    let answer = match cli.command {
+        Command::Add(args) => args.lhs + args.rhs,
+        Command::Sub(args) => args.lhs - args.rhs,
+        Command::Mul(args) => args.lhs * args.rhs,
+        Command::Div(args) => args.lhs / args.rhs,
+    };
     println!("{answer}");
 }

@@ -7,6 +7,7 @@ cargo run
 cargo add clap --features derive
 cargo fmt
 cargo clippy
+cargo test
 ```
 
 

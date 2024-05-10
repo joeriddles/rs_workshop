@@ -59,3 +59,23 @@ where
 {
     lhs + rhs
 }
+
+// tests are generally written in your implementation file
+// ...except integration tests
+
+#[cfg(test)] // gate our code for tests
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_adds() {
+        let expected = 50;
+        let lhs = 10;
+        let rhs = 40;
+
+        let actual = add(lhs, rhs);
+        let actual2 = add2(lhs, rhs);
+
+        assert!(expected == actual && expected == actual2);
+    }
+}

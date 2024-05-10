@@ -34,7 +34,7 @@ fn main() {
         }
         Command::Sub(input) => {
             args = input;
-            func = sub;
+            func = |x, y| x - y; // inline closure
         }
     };
 
@@ -44,8 +44,4 @@ fn main() {
 
 fn add(lhs: Num, rhs: Num) -> Num {
     lhs + rhs
-}
-
-fn sub(lhs: Num, rhs: Num) -> Num {
-    lhs - rhs
 }

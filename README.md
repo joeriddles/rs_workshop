@@ -8,3 +8,7 @@ cargo add clap --features derive
 cargo fmt
 cargo clippy
 ```
+
+
+Questions
+- What is "discriminated union"?

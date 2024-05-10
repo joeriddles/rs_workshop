@@ -1,5 +1,7 @@
 use clap::{Args, Parser, Subcommand};
 
+type Num = f32;
+
 #[derive(Parser, Debug)]
 struct Cli {
     #[command(subcommand)]
@@ -10,23 +12,40 @@ struct Cli {
 enum Command {
     Add(Arguments),
     Sub(Arguments),
-    Mul(Arguments),
-    Div(Arguments),
+    // Mul(Arguments),
+    // Div(Arguments),
 }
 
 #[derive(Debug, Args)]
 struct Arguments {
-    lhs: f32,
-    rhs: f32,
+    lhs: Num,
+    rhs: Num,
 }
 
 fn main() {
     let cli = Cli::parse();
-    let answer = match cli.command {
-        Command::Add(args) => args.lhs + args.rhs,
-        Command::Sub(args) => args.lhs - args.rhs,
-        Command::Mul(args) => args.lhs * args.rhs,
-        Command::Div(args) => args.lhs / args.rhs,
+    let args;
+    let func: fn(Num, Num) -> Num;
+
+    match cli.command {
+        Command::Add(input) => {
+            args = input;
+            func = add;
+        }
+        Command::Sub(input) => {
+            args = input;
+            func = sub;
+        }
     };
+
+    let answer = func(args.lhs, args.rhs);
     println!("{answer}");
+}
+
+fn add(lhs: Num, rhs: Num) -> Num {
+    lhs + rhs
+}
+
+fn sub(lhs: Num, rhs: Num) -> Num {
+    lhs - rhs
 }
